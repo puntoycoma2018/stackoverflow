@@ -58,7 +58,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Inicar Sesión");
+        jLabel1.setText("Iniciar Sesión");
 
         usuario.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
         usuario.setText("Usuario");
