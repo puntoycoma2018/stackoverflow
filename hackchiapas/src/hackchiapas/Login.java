@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
         
         if (tipo.equals("Institución")) {
             if (da.conexionInstitucion(user, pass) == 1) {
-                JOptionPane.showMessageDialog (null, "Sesión iniciada.");            
+                JOptionPane.showMessageDialog (null, "Sesión iniciada.");
             } else {
                 JOptionPane.showMessageDialog (null, "Datos incorrectos.");
             }
@@ -169,7 +169,13 @@ public class Login extends javax.swing.JFrame {
         }
         if (tipo.equals("Estudiante")) {
             if (da.conexionEstudiante(user, pass) == 1) {
-                JOptionPane.showMessageDialog (null, "Sesión iniciada.");            
+                JOptionPane.showMessageDialog (null, "Sesión iniciada.");
+                dispose ();
+                DatosEstudiantes datos = new DatosEstudiantes ();
+                datos.setVisible (true);
+                datos.setLocationRelativeTo (null);
+                datos.setResizable (false);
+                datos.setTitle ("Datos personales");
             } else {
                 JOptionPane.showMessageDialog (null, "Datos incorrectos.");
             }

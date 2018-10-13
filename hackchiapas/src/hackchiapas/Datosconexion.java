@@ -10,7 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -114,6 +117,61 @@ public class Datosconexion extends Conexion {
         
         st.executeUpdate("INSERT INTO estudiante (usuario,contrasenia,correo) VALUES ('" + user +"','"+ contra +"','"+ correo + "')");
         JOptionPane.showMessageDialog(null, "Usuario creado sastifactoriamente.");
+        
+        return conexion;
+    }
+    
+    public int datosEstudiante (String nombre, String materno, String paterno, String uni, int edad, String nacimiento) throws SQLException {
+        int conexion = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Statement st = cn2.createStatement();
+        
+        st.executeUpdate("INSERT INTO DatosEstudiante (nombre,materno,paterno,uni,edad,nacimiento) VALUES ('" + nombre +"','"+ materno +"','"+ paterno + "','"+uni+"','"+edad+"','"+nacimiento+"')");
+        JOptionPane.showMessageDialog(null, "Datos guardados sastifactoriamente.");
+        
+        return conexion;
+    }
+    
+    public int CargaMateria (String materia) throws SQLException {
+        int conexion = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Statement st = cn2.createStatement();
+        
+        st.executeUpdate("INSERT INTO materias (materia) VALUES ('" + materia +"')");
+        JOptionPane.showMessageDialog(null, "Materia agregada sastifactoriamente.");
+        
+        return conexion;
+    }
+    
+    public int mostrarMaterias (JTextArea pantalla) {
+        int conexion = 0;
+        int cont = 0;
+        String print="";
+        pantalla.setText("");
+        try {
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            ps = cn1.prepareStatement ("SELECT * FROM materias");
+            rs = ps.executeQuery();
+                while (rs.next()) {
+                    pantalla.setText(pantalla.getText() + rs.getString("materia") + "   ");
+                    print = (rs.getString("materia"));
+                    //pantalla.setText(pantalla.getText() + "print");
+                    //System.out.print (print);
+                    if (cont==5) {
+                        pantalla.setText(pantalla.getText() + "\n");
+                        cont=0;
+                    }
+                    cont++;
+                }
+                cn1.close();
+                
+        } catch (SQLException e) {
+            System.out.println (e.getMessage());
+        }
+        
         
         return conexion;
     }
