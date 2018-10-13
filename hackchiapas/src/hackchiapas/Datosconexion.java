@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -16,6 +17,7 @@ import java.sql.SQLException;
  */
 public class Datosconexion extends Conexion {
     Connection cn1 = cadena_conexion ();
+    Connection cn2 = cadena_conexion ();
     public int provocarconexion (String user, String pass) {
         int conexion = 0;
         
@@ -45,6 +47,22 @@ public class Datosconexion extends Conexion {
             System.out.println (e.getMessage());
         }
         
+        
+        return conexion;
+    }
+    
+    public int provocarconexion2 (String user, String contra, String correo) throws SQLException {
+        int conexion = 0;
+//        String query = "INSERT INTO usuario1 (usuario,contrasenia,correo) VALUES (" + user +","+ contra +","+ correo + ")";
+        PreparedStatement ps = null;
+//        ps.setString(1, user);
+//        ps.setString(2, contra);
+//        ps.setString(3, correo);
+//        ps.execute();
+        ResultSet rs = null;
+        Statement st = cn2.createStatement();
+        st.executeUpdate("INSERT INTO usuario1 (usuario,contrasenia,correo) VALUES ('" + user +"','"+ contra +"','"+ correo + "')");
+       // rs = ps.executeUpdate();
         
         return conexion;
     }
