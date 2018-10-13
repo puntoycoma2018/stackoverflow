@@ -39,7 +39,7 @@ public class Registro extends javax.swing.JFrame {
         mail = new javax.swing.JTextField();
         registrar = new javax.swing.JButton();
         back = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        type = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,7 +93,7 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Institución", "Tutor", "Estudiante" }));
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Institución", "Tutor", "Estudiante" }));
 
         jLabel2.setText("Como:");
 
@@ -116,7 +116,7 @@ public class Registro extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(37, 37, 37)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(repetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(mail, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +131,7 @@ public class Registro extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,6 +169,7 @@ public class Registro extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         String usuario="",contra="",correo="", repeatPass="";
+        String tipo = (String) type.getSelectedItem();
         usuario = user.getText();
         contra = pass.getText();
         correo = mail.getText();
@@ -177,7 +178,31 @@ public class Registro extends javax.swing.JFrame {
         
         if (repeatPass.equals(contra)) {
             try {
-                con.provocarconexion2(usuario, contra, correo);
+                if (tipo.equals("Institución")) {
+                    con.institucion (usuario, contra, correo);
+                    dispose ();
+                    Login login = new Login ();
+                    login.setVisible (true);
+                    login.setLocationRelativeTo (null);
+                    login.setTitle ("Iniciar Sesión");
+                } 
+                if (tipo.equals("Tutor")) {
+                    con.tutor (usuario, contra, correo);
+                    dispose ();
+                    Login login = new Login ();
+                    login.setVisible (true);
+                    login.setLocationRelativeTo (null);
+                    login.setTitle ("Iniciar Sesión");
+                }
+                if (tipo.equals("Estudiante")) {
+                    con.estudiante (usuario, contra, correo);
+                    dispose ();
+                    Login login = new Login ();
+                    login.setVisible (true);
+                    login.setLocationRelativeTo (null);
+                    login.setTitle ("Iniciar Sesión");
+                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -236,13 +261,13 @@ public class Registro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField mail;
     private javax.swing.JTextField pass;
     private javax.swing.JButton registrar;
     private javax.swing.JTextField repetirContra;
+    private javax.swing.JComboBox<String> type;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 
