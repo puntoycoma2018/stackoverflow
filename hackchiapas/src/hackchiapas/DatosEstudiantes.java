@@ -78,6 +78,11 @@ public class DatosEstudiantes extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cerrar Sesión");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,6 +185,15 @@ public class DatosEstudiantes extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose ();
+        Login datos = new Login ();
+        datos.setVisible (true);
+        datos.setLocationRelativeTo (null);
+        datos.setResizable (false);
+        datos.setTitle ("Iniciar Sesión");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

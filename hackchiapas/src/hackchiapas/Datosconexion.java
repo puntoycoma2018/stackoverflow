@@ -158,8 +158,6 @@ public class Datosconexion extends Conexion {
                 while (rs.next()) {
                     pantalla.setText(pantalla.getText() + rs.getString("materia") + "   ");
                     print = (rs.getString("materia"));
-                    //pantalla.setText(pantalla.getText() + "print");
-                    //System.out.print (print);
                     if (cont==5) {
                         pantalla.setText(pantalla.getText() + "\n");
                         cont=0;
